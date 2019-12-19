@@ -1,5 +1,4 @@
 <template>
-<v-navigation-drawer app v-model="drawer" clipped>
     <v-container>
         <v-list-item>
             <v-list-item-content>
@@ -47,7 +46,6 @@
         </v-list>
 
     </v-container>
-</v-navigation-drawer>
 </template>
 
 <script>
@@ -58,9 +56,10 @@ export default {
                 {
                     name: 'Getting Started',
                     icon: 'mdi-speedometer',
-                    lists:[{
-                        name:'Quick Start',link:'/quick-start'
-                    },
+                    lists:[
+                        {
+                            name:'Quick Start',link:'/quick-start'
+                        },
                         {
                             name:'Pre-made layouts',link:'/pre-made-layouts'
                         }

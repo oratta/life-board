@@ -1,7 +1,9 @@
 <template>
     <v-app>
-        <NavigationMenu />
-        <v-app-bar color="primary" dark app clipped-left>
+        <v-navigation-drawer app v-model="drawer" clipped>
+            <NavigationMenu/>
+        </v-navigation-drawer>
+        <v-app-bar color="primary" dark app clippedLeft>
             <v-app-bar-nav-icon @click="drawer=!drawer"></v-app-bar-nav-icon>
             <v-toolbar-title to="/">LifeBoard</v-toolbar-title>
             <v-spacer></v-spacer>

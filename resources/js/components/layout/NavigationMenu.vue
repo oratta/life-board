@@ -25,7 +25,7 @@
                         </v-list-item-title>
                     </v-list-item-content>
                 </template>
-                <v-list-item v-for="list in nav_list.lists" :key="list" :to="list.link">
+                <v-list-item v-for="list in nav_list.lists" :key="list.name" :to="list.link">
                     <v-list-item-content>
                         <v-list-item-title>{{ list.name }}</v-list-item-title>
                     </v-list-item-content>
@@ -36,7 +36,7 @@
 
 
 
-            <v-list-item v-for="nav_list in nav_lists" :key="nav_list.name">
+            <v-list-item v-for="nav_list in nav_lists" :key="'A'+ nav_list.name">
                 <v-list-item-icon>
                     <v-icon>{{ nav_list.icon }}</v-icon>
                 </v-list-item-icon>

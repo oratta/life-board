@@ -5,100 +5,10 @@
                 <v-card>
                     <form>
                         <v-row>
-                            <v-col cols="9">
-                                <v-card-subtitle>Habit Name</v-card-subtitle>
-                                <v-card-actions>
-                                    <v-text-field
-                                            label="Input Habit Name"
-                                    >
-                                    </v-text-field>
-                                </v-card-actions>
-                            </v-col>
-                            <v-col cols="3">
-                                <v-card-subtitle>Timer</v-card-subtitle>
-                                <v-card-actions>
-                                    <v-btn class="mx-2" fab dark small color="cyan">
-                                        <v-icon dark>mdi-play-circle-outline</v-icon>
-                                    </v-btn>
-                                </v-card-actions>
-                            </v-col>
-                        </v-row>
-                    </form>
-                </v-card>
-            </v-col>
-        </v-row>
-        <v-row>
-            <v-col cols="12">
-                <v-card>
-                    <form>
-                        <v-row>
-                            <v-col cols="9">
-                                <v-card-subtitle>Habit Name</v-card-subtitle>
-                                <v-card-text
-                                        align="center"
-                                        large
-                                >
-                                    <div class="display-2 font-weight-thick">禁酒</div>
-                                </v-card-text>
-                            </v-col>
-                            <v-col cols="3">
-                                <v-card-subtitle>Timer</v-card-subtitle>
-                                <v-card-text>12day 11:23:54</v-card-text>
-                                <v-card-actions>
-                                    <v-btn class="mx-2" fab dark small color="red">
-                                        <v-icon dark>mdi-stop-circle-outline</v-icon>
-                                    </v-btn>
-                                </v-card-actions>
-                            </v-col>
-                        </v-row>
-                    </form>
-                </v-card>
-            </v-col>
-        </v-row>
-        <v-row>
-            <v-col cols="12">
-                <v-card>
-                    <form>
-                        <v-row>
-                            <v-col cols="9" align="center" justify="center">
-                                <v-card-subtitle>Habit Name</v-card-subtitle>
-                                <v-layout justify-center align-center>
-                                    <v-card-text>
-                                        <div class="display-2 font-weight-thick">毎日本を読む</div>
-                                    </v-card-text>
-
-                                </v-layout>
-                            </v-col>
-                            <v-col cols="3">
-                                <v-card-subtitle>Timer</v-card-subtitle>
-                                <v-chip
-                                        class="ma-2"
-                                        color="green"
-                                        text-color="white"
-                                >
-                                    Best Record
-                                </v-chip>
-                                <v-card-text>154day 11:23:54</v-card-text>
-                                <v-card-actions>
-                                    <v-btn class="mx-2" fab dark small color="red">
-                                        <v-icon dark>mdi-stop-circle-outline</v-icon>
-                                    </v-btn>
-                                </v-card-actions>
-                            </v-col>
-                        </v-row>
-                    </form>
-                </v-card>
-            </v-col>
-        </v-row>
-        <v-row>
-            <v-col cols="12">
-                <v-card>
-                    <form>
-                        <v-row>
                             <v-col cols="9" align="center" justify="center">
                                 <v-card-subtitle>Habit Name</v-card-subtitle>
                                 <v-card-text>
-                                    <div class="display-2 font-weight-thick">毎日本を読む</div>
+                                    <div class="display-1 font-weight-thick">毎日本を読む</div>
                                 </v-card-text>
                                 <v-chip
                                         class="ma-2"
@@ -108,6 +18,29 @@
                                     Best Record
                                 </v-chip>
                                 <v-card-text class="display-1">154day 11:23:54</v-card-text>
+<!--                                <v-card-text class="display-1">{{checkHours | zeroPadding}}：{{checkMinutes | zeroPadding}}：{{checkSeconds | zeroPadding}}：{{checkMilliSeconds | showMilliseconds}}</v-card-text>-->
+                                <div class="center aligned row">
+                                    <h1 class="ui header">Vue Simple Stop Watch</h1>
+                                    <div class="column">
+                                        <p>Elapsed Time:
+                                            {{ hours }} :
+                                            {{ minutes | zeroPad }} :
+                                            {{ seconds | zeroPad }} :
+                                            {{ milliSeconds | zeroPad(3) }}</p>
+                                        <button class="ui secondary button" @click="startTimer" :disabled="isRunning">START</button>
+                                        <button class="ui button" @click="pushTime" :disabled="!isRunning">LAP</button>
+                                        <button class="ui button" @click="stopTimer" :disabled="!isRunning">STOP</button>
+                                        <button class="ui basic button" @click="clearAll">CLEAR</button>
+                                        <ul class="ui bulleted list" v-if="times.length">
+                                            <li class="item" v-for="item in times">
+                                                {{ item.hours  }} :
+                                                {{ item.minutes | zeroPad }} :
+                                                {{ item.seconds | zeroPad }} :
+                                                {{ item.milliSeconds | zeroPad(3) }}
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
                             </v-col>
                             <v-col cols="3" justify="center" align-self="center">
                                 <v-btn class="mx-1" fab dark large color="red">
@@ -139,52 +72,105 @@
                                     <v-icon dark large>mdi-play-circle-outline</v-icon>
                                 </v-btn>
                                 <v-card-text>start</v-card-text>
+                                <v-btn
+                                        absolute
+                                        dark
+                                        fab
+                                        bottom
+                                        right
+                                        color="pink"
+                                >
+                                    <v-icon>mdi-plus</v-icon>
+                                </v-btn>
                             </v-col>
                         </v-row>
                     </form>
                 </v-card>
             </v-col>
         </v-row>
-        <v-row>
-            <v-col cols="12" sm="12" md="6">
-                <v-card>
-                    <v-card-text style="height: 300px;" class="grey lighten-5"></v-card-text>
-                    <v-card-text style="height: 100px; position: relative">
-                        <v-btn
-                                absolute
-                                dark
-                                fab
-                                top
-                                right
-                                color="pink"
-                        >
-                            <v-icon>mdi-plus</v-icon>
-                        </v-btn>
-                    </v-card-text>
-                </v-card>
-            </v-col>
-            <v-col cols="12" sm="12" md="6">
-                <v-card>
-                    <v-toolbar extended>
-                        <v-app-bar-nav-icon></v-app-bar-nav-icon>
-                        <template v-slot:extension>
-                            <v-btn
-                                    color="pink"
-                                    dark
-                                    small
-                                    absolute
-                                    bottom
-                                    left
-                                    fab
-                            >
-                                <v-icon>mdi-plus</v-icon>
-                            </v-btn>
-                        </template>
-                    </v-toolbar>
-                    <v-card-text style="height: 236px;" class="grey lighten-5"></v-card-text>
-                    <v-card-text style="height: 100px; position: relative"></v-card-text>
-                </v-card>
-            </v-col>
-        </v-row>
     </v-container>
 </template>
+
+<script>
+export default{
+    data(){
+        return {
+            times: [],
+            animateFrame: 0,
+            nowTime: 0,
+            diffTime: 0,
+            startTime: 0,
+            isRunning: false
+        }
+    },
+    methods: {
+        // 現在時刻から引数に渡した数値を startTime に代入
+        setSubtractStartTime: function (time) {
+            var time = typeof time !== 'undefined' ? time : 0;
+            this.startTime = Math.floor(performance.now() - time);
+        },
+        // タイマーをスタートさせる
+        startTimer: function () {
+            // loop()内で this の値が変更されるので退避
+            var vm = this;
+            vm.setSubtractStartTime(vm.diffTime);
+            // ループ処理
+            (function loop(){
+                vm.nowTime = Math.floor(performance.now());
+                vm.diffTime = vm.nowTime - vm.startTime;
+                vm.animateFrame = requestAnimationFrame(loop);
+            }());
+            vm.isRunning = true;
+        },
+        // タイマーを停止させる
+        stopTimer: function () {
+            this.isRunning = false;
+            cancelAnimationFrame(this.animateFrame);
+        },
+        // 計測中の時間を配列に追加
+        pushTime: function () {
+            this.times.push({
+                hours: this.hours,
+                minutes: this.minutes,
+                seconds: this.seconds,
+                milliSeconds: this.milliSeconds
+            });
+        },
+        // 初期化
+        clearAll: function () {
+            this.startTime = 0;
+            this.nowTime = 0;
+            this.diffTime = 0;
+            this.times = [];
+            this.stopTimer();
+            this.animateFrame = 0;
+        }
+    },
+    computed: {
+        // 時間を計算
+        hours: function () {
+            return Math.floor(this.diffTime / 1000 / 60 / 60);
+        },
+        // 分数を計算 (60分になったら0分に戻る)
+        minutes: function () {
+            return Math.floor(this.diffTime / 1000 / 60) % 60;
+        },
+        // 秒数を計算 (60秒になったら0秒に戻る)
+        seconds: function () {
+            return Math.floor(this.diffTime / 1000) % 60;
+        },
+        // ミリ数を計算 (1000ミリ秒になったら0ミリ秒に戻る)
+        milliSeconds: function () {
+            return Math.floor(this.diffTime % 1000);
+        }
+    },
+    filters: {
+        // ゼロ埋めフィルタ 引数に桁数を入力する
+        // ※ String.prototype.padStart() は IEじゃ使えない
+        zeroPad: function(value, num){
+            var num = typeof num !== 'undefined' ? num : 2;
+            return value.toString().padStart(num,"0");
+        }
+    }
+}
+</script>

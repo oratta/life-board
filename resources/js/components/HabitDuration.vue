@@ -11,7 +11,18 @@
                             <v-col cols="9" align="center" justify="center">
                                 <v-card-subtitle>habit name</v-card-subtitle>
                                 <v-card-text>
-                                    <div class="display-1 font-weight-thick">{{ habitDuration.name}}</div>
+                                    <div
+                                            class="display-1 font-weight-thick"
+                                            v-if="habitDuration.name"
+                                    >
+                                        {{ habitDuration.name}}
+                                    </div>
+                                    <v-text-field
+                                            label="Input Habit Name"
+                                            v-else
+                                            v-model="habitDuration.inputName"
+                                    >
+                                    </v-text-field>
                                 </v-card-text>
                                 <v-chip
                                         class="ma-2"
@@ -21,7 +32,10 @@
                                 >
                                     Best Record
                                 </v-chip>
-                                <v-card-text class="display-1">
+                                <v-card-text
+                                        class="display-1"
+                                        v-show="habitDuration.diffTime"
+                                >
                                     {{ hours(habitDuration) }} :
                                     {{ minutes(habitDuration) | zeroPad }} :
                                     {{ seconds(habitDuration) | zeroPad }} :
@@ -143,7 +157,10 @@ export default{
         },
         // タイマーをスタートさせる
         startTimer: function (habitDuration) {
-            // loop()内で this の値が変更されるので退避
+            if(!habitDuration.name){
+                habitDuration.name = habitDuration.inputName;
+            }
+
             habitDuration.startTime = this.getSubtractStartTime(habitDuration.diffTime);
             // ループ処理
             (function loop(){
@@ -152,6 +169,7 @@ export default{
                 habitDuration.animateFrame = requestAnimationFrame(loop);
             }());
             habitDuration.isRunning = true;
+            console.log(habitDuration);
         },
         // タイマーを停止させる
         stopTimer: function (habitDuration) {

@@ -25,10 +25,28 @@
                                 </v-card-text>
                             </v-col>
                             <v-col cols="3" justify="center" align-self="center">
-                                <v-btn class="mx-1" fab dark large color="red" @click="stopTimer">
+                                <v-btn
+                                        class="mx-1"
+                                        fab
+                                        dark
+                                        large
+                                        color="red"
+                                        @click="stopTimer"
+                                        v-show="isRunning"
+                                >
                                     <v-icon dark large>mdi-stop-circle-outline</v-icon>
                                 </v-btn>
-                                <v-card-text>stop</v-card-text>
+                                <v-btn
+                                        class="mx-1"
+                                        fab
+                                        dark
+                                        large
+                                        color="cyan"
+                                        @click="startTimer"
+                                        v-show="!isRunning"
+                                >
+                                    <v-icon dark large>mdi-play-circle-outline</v-icon>
+                                </v-btn>
                             </v-col>
                         </v-row>
                     </form>

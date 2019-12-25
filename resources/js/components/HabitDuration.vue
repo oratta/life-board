@@ -73,36 +73,22 @@
         </v-row>
         <v-row>
             <v-col cols="12">
-                <v-card>
-                    <form>
-                        <v-row justify="center">
-                            <v-col cols="9" align="center" justify="center">
-                                <v-card-subtitle>Habit Name</v-card-subtitle>
-                                <v-card-text>
-                                    <v-text-field
-                                            label="Input Habit Name"
-                                    >
-                                    </v-text-field>
-                                </v-card-text>
-                            </v-col>
-                            <v-col cols="3" justify="center" align-self="center">
-                                <v-btn class="mx-1" fab dark large color="cyan" @click="startTimer">
-                                    <v-icon dark large>mdi-play-circle-outline</v-icon>
-                                </v-btn>
-                                <v-card-text>start</v-card-text>
-                                <v-btn
-                                        absolute
-                                        dark
-                                        fab
-                                        bottom
-                                        right
-                                        color="pink"
-                                >
-                                    <v-icon>mdi-plus</v-icon>
-                                </v-btn>
-                            </v-col>
-                        </v-row>
-                    </form>
+                <v-card flat>
+                    <v-row justify="center">
+                        <v-col cols="12" justify="center" align-self="center">
+                            <v-btn
+                                    absolute
+                                    dark
+                                    fab
+                                    bottom
+                                    right
+                                    color="pink"
+                                    @click="addHabit"
+                            >
+                                <v-icon>mdi-plus</v-icon>
+                            </v-btn>
+                        </v-col>
+                    </v-row>
                 </v-card>
             </v-col>
         </v-row>
@@ -199,10 +185,21 @@ export default{
         // ミリ数を計算 (1000ミリ秒になったら0ミリ秒に戻る)
         milliSeconds: function (habitDuration) {
             return Math.floor(habitDuration.diffTime % 1000);
+        },
+        addHabit: function() {
+            this.habitDurations.push(
+                {
+                    name: null,
+                    diffTime: 0,
+                    animateFrame: 0,
+                    nowTime: 0,
+                    startTime: 0,
+                    isRunning: false,
+                    isBest: false,
+                }
+            )
+            console.log(this.habitDurations)
         }
-
-    },
-    computed: {
     },
     filters: {
         // ゼロ埋めフィルタ 引数に桁数を入力する

@@ -17,33 +17,15 @@
                                 >
                                     Best Record
                                 </v-chip>
-                                <v-card-text class="display-1">154day 11:23:54</v-card-text>
-<!--                                <v-card-text class="display-1">{{checkHours | zeroPadding}}：{{checkMinutes | zeroPadding}}：{{checkSeconds | zeroPadding}}：{{checkMilliSeconds | showMilliseconds}}</v-card-text>-->
-                                <div class="center aligned row">
-                                    <h1 class="ui header">Vue Simple Stop Watch</h1>
-                                    <div class="column">
-                                        <p>Elapsed Time:
-                                            {{ hours }} :
-                                            {{ minutes | zeroPad }} :
-                                            {{ seconds | zeroPad }} :
-                                            {{ milliSeconds | zeroPad(3) }}</p>
-                                        <button class="ui secondary button" @click="startTimer" :disabled="isRunning">START</button>
-                                        <button class="ui button" @click="pushTime" :disabled="!isRunning">LAP</button>
-                                        <button class="ui button" @click="stopTimer" :disabled="!isRunning">STOP</button>
-                                        <button class="ui basic button" @click="clearAll">CLEAR</button>
-                                        <ul class="ui bulleted list" v-if="times.length">
-                                            <li class="item" v-for="item in times">
-                                                {{ item.hours  }} :
-                                                {{ item.minutes | zeroPad }} :
-                                                {{ item.seconds | zeroPad }} :
-                                                {{ item.milliSeconds | zeroPad(3) }}
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
+                                <v-card-text class="display-1">
+                                    {{ hours }} :
+                                    {{ minutes | zeroPad }} :
+                                    {{ seconds | zeroPad }} :
+                                    {{ milliSeconds | zeroPad(3) }}
+                                </v-card-text>
                             </v-col>
                             <v-col cols="3" justify="center" align-self="center">
-                                <v-btn class="mx-1" fab dark large color="red">
+                                <v-btn class="mx-1" fab dark large color="red" @click="stopTimer">
                                     <v-icon dark large>mdi-stop-circle-outline</v-icon>
                                 </v-btn>
                                 <v-card-text>stop</v-card-text>
@@ -68,7 +50,7 @@
                                 </v-card-text>
                             </v-col>
                             <v-col cols="3" justify="center" align-self="center">
-                                <v-btn class="mx-1" fab dark large color="cyan">
+                                <v-btn class="mx-1" fab dark large color="cyan" @click="startTimer">
                                     <v-icon dark large>mdi-play-circle-outline</v-icon>
                                 </v-btn>
                                 <v-card-text>start</v-card-text>
